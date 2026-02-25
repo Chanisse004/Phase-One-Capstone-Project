@@ -1,0 +1,3 @@
+CS101,Programming 101,3,30
+CS201,Data Structures,4,25
+MATH101,Calculus,4,35
