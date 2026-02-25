@@ -1,0 +1,4 @@
+S003,NIYIREMA Clesence,Clesence2@uni.edu,Math,3.0,UNDERGRAD
+S001,Umuhoza chanisse,chanisse@uni.edu,CS,3.4285714285714284,UNDERGRAD
+S002,Uwase Gisele,Gisele@uni.edu,CS,4.0,GRAD
+27769,UMUHOZA CHANISSE,chanissaumuhoza004@gmail.com,software engineering,0.0,UNDERGRAD
