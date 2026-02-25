@@ -1,100 +1,83 @@
-# College Management System
+# College Management System (Phase One Capstone Project)
 
-Professional Java application for managing student records, course enrollment, grading, and administrative reports for educational institutions.
+console-based Java application to manage students, courses, enrollments and grades. This project provides university management features such as registering students, creating courses, enrolling students, assigning grades, computing GPA/tuition, and generating the Dean's list.
 
-## Overview
+## Key features
 
-This project is a console-based Java application that models core university operations: student registration, course management, enrollments, grade tracking, GPA calculation, tuition computation, and report generation (e.g., Dean's list). The project was developed as a lightweight educational management system and stores data in simple text files.
+- Register undergraduate and graduate students (`UndergraduateStudent`, `GraduateStudent`).
+- Create courses and manage course capacities.
+- Enroll students in courses with capacity and duplicate-enrollment checks.
+- Assign grades and compute GPAs.
+- Calculate tuition (per-student logic in `Student` subclasses).
+- Persist data to text files and load them on startup (`students.txt`, `courses.txt`, `enrollments.txt`).
+- Console menu with a test-data loader (menu option `9`) to seed example data.
 
-Current status: the original `src/` directory is missing from this workspace. Compiled classes were found under `out/production/College Management System`. Below you'll find instructions to recover source files, a quick-start to run a minimal build, and development notes.
+## Project structure (important files)
 
-## Features
+- `src/Main.java` — console UI and program entry point.
+- `src/service/UniversityManager.java` — core application logic (student/course management).
+- `src/service/FileManager.java` — load/save data from/to text files (`students.txt`, `courses.txt`, `enrollments.txt`).
+- `src/model/` — `Student`, `UndergraduateStudent`, `GraduateStudent`, `Course`, `Instructor`, `Person` classes.
+- `src/exception/` — custom exceptions such as `CourseFullException`, `StudentAlreadyEnrolledException`.
+- `students.txt`, `courses.txt`, `enrollments.txt` — data files used by the app (created/updated by `FileManager`).
 
-- Register undergraduate and graduate students
-- Create and manage courses (capacity, credits)
-- Enroll students with duplicate-enrollment protection
-- Assign grades and compute GPAs
-- Generate Dean's list (GPA threshold)
-- Persist data to text files (students.txt, courses.txt, enrollments.txt)
 
-## System requirements
+src/
+ ├── model/
+ │     ├── Person.java
+ │     ├── Student.java
+ │     ├── Instructor.java
+ │     └── Course.java
+ │
+ ├── service/
+ │     ├── UniversityManager.java
+ │     └── FileManager.java
+ │
+ ├── exception/
+ │     └── EnrollmentException.java
+ │
+ └── Main.java
 
-- Java JDK 8 or newer
-- Windows / macOS / Linux
-- Minimal disk and memory requirements
 
-## Quick recovery note (missing src)
+## Prerequisites
 
-The project's source folder (`src/`) is currently missing. Compiled classes were detected at `out/production/College Management System`. You have two practical recovery options:
+- Java JDK 8 or later installed and `javac`/`java` available on PATH.
+- (Optional) An IDE such as IntelliJ IDEA for easier editing and running.
 
-1. Decompile compiled classes (recommended for full recovery):
-   - Use a decompiler such as CFR (recommended), JD-CLI, or JADX to create Java source files from the `.class` files under `out/production/College Management System`.
-   - Example (CFR):
-     1. Download `cfr.jar` from https://www.benf.org/other/cfr/
-     2. From the project root:
-        - `java -jar cfr.jar --outputdir recovered\src "out\production\College Management System"`
-   - Inspect and commit the recovered sources into `src/`.
 
-2. Recreate a skeleton `src` tree manually:
-   - Create package folders and reimplement source code by hand (slower, but safe).
-   - Use IntelliJ Local History or VCS (git) to restore deleted files if available.
+  ## Key Features
 
-Important: Back up the `out/` directory before writing recovered sources.
+- Add students
+- Add courses
+- Enroll students into courses
+- Prevent duplicate enrollments
+- Handle errors using custom exceptions
+- Store and manage data using Collections
 
-## Quick-start (minimal skeleton)
 
-A minimal `src/` skeleton is provided to allow building and running a smoke test. To compile the minimal skeleton (created for you automatically):
+## Usage (console menu)
 
-1. From the project root (PowerShell):
+When you run the app it shows a menu with the following options:
 
-```powershell
-# create output directory and compile all Java files under the repo
-$files = Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName }
-New-Item -ItemType Directory -Path out\rebuild -Force
-javac -d out\rebuild $files
-```
+- `1` — Register Student: provide ID, name, email, department, and type (1=Undergrad, 2=Grad).
+- `2` — Enroll in Course: enter student ID and course code; after enrollment you can enter a grade.
+- `3` — View Student Record: shows profile, GPA, tuition, and enrolled courses with grades.
+- `4` — Generate Dean's List: lists students with GPA > 3.5.
+- `5` — Save and Exit: writes data to the text files and exits.
+- `9` — Add Test Data: populates example students, courses, enrollments, and grades for quick testing.
 
-2. Run the minimal app (example):
 
-```powershell
-java -cp out\rebuild Main
-```
 
-This will run a small placeholder main that confirms the project structure is valid. The skeleton is intentionally minimal and does not include full business logic.
+## Data files
 
-## Recommended recovery workflow
+- `students.txt`, `courses.txt`, `enrollments.txt` are used by `FileManager` to persist state.
+- The files are located in the same folder where you run the program (project root / inner project folder). The application will create them if they do not already exist.
 
-1. Backup the repository and `out/production`.
-2. Attempt automated decompilation (CFR) into `recovered/src`.
-3. Review, fix, and test decompiled sources.
-4. Commit recovered sources to version control.
 
-## Development notes
 
-- The original project structure (expected):
+## Author
 
-```
-College Management System/
-  src/
-    Main.java
-    model/
-    service/
-    exception/
-  students.txt
-  courses.txt
-  enrollments.txt
-```
+Umuhoza Chanisse
 
-- The application uses plain text files for persistence (`students.txt`, `courses.txt`, `enrollments.txt`).
-- Decompilation can produce syntactically correct source but may lose comments, original variable names, and sometimes needs manual fixes (especially around generics, lambdas, inner classes).
+Software Engineering Student
 
-## Next steps I can take for you
-
-- Run an automated decompilation of `out/production/College Management System` into `recovered/src` using CFR and place recovered files into `src/` after your confirmation.
-- Or keep the minimal skeleton and incrementally reimplement functionality.
-
-If you want me to proceed with automated decompilation now, tell me which approach you prefer: CFR (recommended) or JD-CLI. If you prefer manual restore via IntelliJ Local History or git, I can walk you through those steps.
-
----
-
-(README updated automatically by an assistant to include recovery guidance and a minimal build path.)
