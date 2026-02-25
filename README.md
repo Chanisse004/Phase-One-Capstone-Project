@@ -79,5 +79,6 @@ When you run the app it shows a menu with the following options:
 
 Umuhoza Chanisse
 
-Software Engineering Student
+
+
 
